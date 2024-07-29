@@ -1,0 +1,22 @@
+@startuml
+[*] --> Pendiente
+
+Pendiente : El pedido ha sido realizado pero no ha sido procesado aún.
+Pendiente --> Procesando: Orden confirmada
+
+Procesando : El pedido está siendo preparado.
+Procesando --> Enviado: Pedido preparado
+
+Enviado : El pedido ha sido enviado.
+Enviado --> Entregado: Pedido recibido por el cliente
+
+Entregado : El pedido ha sido entregado al cliente.
+Entregado --> [*]
+
+Pendiente --> Cancelado: Orden cancelada
+Procesando --> Cancelado: Orden cancelada
+Enviado --> Devolución: Pedido devuelto por el cliente
+
+Devolución : El pedido ha sido devuelto por el cliente.
+Devolución --> [*]
+@enduml

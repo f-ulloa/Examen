@@ -1,0 +1,42 @@
+@startuml
+actor Usuario
+boundary Sistema
+control Controlador
+entity BaseDeDatos
+
+Usuario -> Sistema: Solicitar datos
+Sistema -> Controlador: Procesar solicitud
+Controlador -> BaseDeDatos: Consultar datos
+
+alt Datos disponibles
+    BaseDeDatos --> Controlador: Retornar datos
+    Controlador --> Sistema: Datos procesados
+    Sistema --> Usuario: Mostrar datos
+else Datos no disponibles
+    Controlador --> Sistema: Error: Datos no disponibles
+    Sistema --> Usuario: Mostrar mensaje de error
+end
+
+note right of Sistema
+    Este es un ejemplo de 
+    un diagrama de secuencia complejo
+end note
+
+group Operación adicional
+    Usuario -> Sistema: Solicitar operación adicional
+    Sistema -> Controlador: Procesar operación adicional
+    Controlador -> BaseDeDatos: Actualizar datos
+    BaseDeDatos --> Controlador: Confirmación de actualización
+    Controlador --> Sistema: Operación completada
+    Sistema --> Usuario: Confirmación de operación
+end
+
+loop Verificar actualizaciones
+    Sistema -> BaseDeDatos: Verificar cambios
+    BaseDeDatos --> Sistema: Datos actualizados
+end
+
+opt Log de actividad
+    Controlador -> BaseDeDatos: Registrar actividad
+end
+@enduml
